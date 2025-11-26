@@ -1,0 +1,51 @@
+.backdrop {
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  background: #ffffff;
+  transform: translate(-50%, -60%);
+}
+
+.left {
+  position: relative;
+  justify-content: space-between;
+  column-gap: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.inline {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 5px;
+}
+
+.icon-img {
+  width: 20px;
+  margin: 3px 0;
+}
+
+.title {
+  padding-left: 10px;
+  ;
+  display: inline;
+}
+
+.close-inline {
+  margin-top: 2px;
+  margin-right: -19px;
+}
+
+.content {
+  padding: 0 20px 20px 20px;
+}

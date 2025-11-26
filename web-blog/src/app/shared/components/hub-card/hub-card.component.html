@@ -1,0 +1,16 @@
+<div class="container">
+    <app-hub [name]="hub?.name" [ngStyle]="{'margin-left': '-5px'}"></app-hub>
+    <div class="text-content" (click)="textClick()">
+        <div *ngIf="!expanded">
+          <span>{{ hub?.description | truncate:[160, ''] }}</span>
+          <span style="color: blue">...</span>
+        </div>
+
+        <p *ngIf="expanded">{{ hub?.description }}</p>
+    </div>
+    <div class="footer-container">
+        <small [ngClass]="{'posts': true, 'posts-on': isFiltered, 'posts-off': !isFiltered}" (click)="postsClick()">Постов {{ postCount() }} </small>
+        <mat-icon *ngIf="isFiltered" class="filter-icon">filter_alt</mat-icon>
+        <small>Coзд. {{ hub?.created | date: 'dd.MM.yy' }}</small>
+    </div>
+</div>

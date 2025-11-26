@@ -1,0 +1,118 @@
+<div *ngIf="posts.length; else loadingTemplate">
+    <div class="edit-container">
+        <div class="post-table-container">
+            <div class="form-control">
+                <input type="text" placeholder="Искать в постах..." [(ngModel)]="searchStr">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Автор</th>
+                        <th>Название</th>
+                        <th>Дата</th>
+                        <th colspan="2">Действие</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let post of posts | searchPosts: searchStr; let idx = index">
+                        <td>{{ idx+1 }}</td>
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.created | date: 'dd.MM.yyyy HH:mm:ss': null: 'ru' }}</td>
+                        <td>
+                            <app-edit-button (edit)="edit(post.id)" title="Редактировать"></app-edit-button>
+                        </td>
+                        <td>
+                            <app-close-button [disabled]="!deleteEnable" (close)="remove(post)" title="Удалить">
+                            </app-close-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="hub-edit-space">
+
+            <div class="form-control">
+                <input type="text" placeholder="Искать в темах..." >
+            </div>
+            <form [formGroup]="form" (ngSubmit)="submit()">
+
+                <div class="hub-space">
+                    <div class="hub-slider">
+                        <app-hub *ngFor="let hub of hubs" class="hub-item"
+                            [selected]="selected && selected.name == hub.name" [editable]="deleteEnable"
+                            template="button" [name]="hub.name" (click)="hubClick(hub)" [@fadeInOut] [@EnterLeave]>
+                        </app-hub>
+                    </div>
+                    <div class="hub-edit">
+                        <div class="button-footer">
+                            <button type="button" class="btn" mat-button [@buttonState]="'false'" (click)="onClick()">
+                                Получить
+                            </button>
+                        </div>
+
+                        <div [ngClass]="{'back-drop':true, 'disable': !selected, 'enable': selected}"></div>
+
+                        <div class="form-control"
+                            [ngClass]="{invalid: (form.touched || nameControl.touched) && nameControl.invalid}">
+                            <label for="name">Название:</label>
+                            <input (keyup)="touch(nameControl)" type="text" [formControl]="nameControl"
+                                (change)="onNameEnter($event)" containsInList [base]="hubs" [exclude]="selected">
+                            <div *ngIf="(form.touched || nameControl.touched) && nameControl.invalid"
+                                class="validation">
+                                <small *ngIf="form.get('name').errors.required">
+                                    Поле должно быть заполнено
+                                </small>
+                                <small *ngIf="nameControl.hasError('isInBase') && !nameControl.hasError('required')">
+                                    Это имя уже используется
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-control desc"
+                            [ngClass]="{invalid: (form.touched || form.get('description').touched) && form.get('description').invalid}">
+                            <label for="description">Описание</label>
+                            <textarea id="description" class="height" type="text" formControlName="description"
+                                (change)="onDescriptionEnter($event)"></textarea>
+                            <div *ngIf="(form.touched || form.get('description').touched) && form.get('description').invalid"
+                                class="validation">
+                                <small *ngIf="form.get('description').errors.required">
+                                    Поле должно быть заполнено
+                                </small>
+                            </div>
+                        </div>
+                        <div class="button-footer">
+                            <button type="submit" class="btn" mat-button [@buttonState]="!selected || form.invalid"
+                                [disabled]="!selected || form.invalid || loading">
+                                Обновить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="fab-container">
+  <button (click)="addClick()" matTooltip="добавить новый пост" matTooltipPosition="right" matTooltipClass="btn-tooltip" class="btn btn-primary fab-button" mat-mini-fab type="button">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.1)" size="medium" color='#333333' type="ball-spin-clockwise" [fullScreen]="true">
+    <p class="spinner-message"> {{ spinnerMessage }} </p>
+</ngx-spinner>
+<footer>
+    <mat-slide-toggle class="toggle-scale" (change)="onDeleteEnabledChange($event)" color="warn"></mat-slide-toggle>
+    <div class="toggle-title">Разрешить удаление</div>
+</footer>
+
+
+<ng-template #loadingTemplate>
+    <p class="text-center">Идет загрузка...</p>
+</ng-template>
+
+<ng-template appModalRef></ng-template>

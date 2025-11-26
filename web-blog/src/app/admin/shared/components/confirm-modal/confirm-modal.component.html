@@ -1,0 +1,24 @@
+<app-modal title="Подтвердить действие" type="warning" (close)="close.emit()">
+    <div class="delete-container">
+        <div class="space-container">
+
+            <pre class="text-message">{{ text }}</pre>
+
+            <div class="button-footer">
+                <button type="button" class="btn" mat-button (click)="onClick()" [@buttonState]="loading"
+                    [disabled]="loading">
+                    Да
+                </button>
+                <button type="button" class="btn" mat-button (click)="close.emit()" [@buttonCancelState]="loading"
+                    [disabled]="loading">
+                    Отмена
+                </button>
+            </div>
+
+        </div>
+        <ngx-spinner name="confirmDeleteSpinner" bdColor="rgba(0, 0, 0, 0.1)" size="medium" color='#333333'
+            type="ball-spin-clockwise" [fullScreen]="true">
+            <p class="spinner-message"> Отпрвлено... </p>
+        </ngx-spinner>
+    </div>
+</app-modal>

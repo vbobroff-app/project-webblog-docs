@@ -1,0 +1,54 @@
+.link-hover{
+  &:hover{
+    color: #0d84fc;
+    cursor: pointer;
+  }
+}
+
+.present-content{
+  display: flex;
+  flex-direction: row;
+  justify-content:  space-between;
+}
+
+.icon-image{
+  width: 96px;
+  height: auto;
+}
+
+.text-content{
+  text-align: left;
+  width: 100%;
+  margin: 0 5px 0 12px;
+}
+
+
+.foot-container{
+    display: flex;
+    flex-direction: row;
+    justify-content:  space-between;
+}
+
+
+.hub-container{
+    margin-right: -2px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-basis: 100%;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    &.space{
+        justify-content: space-between;
+    }
+}
+.hub-item {
+    opacity: 1;
+    &:hover{
+        opacity: 0.8;
+        transition: opacity 0.15s ease-in;
+    }
+    &:active{
+        opacity: 1;
+    }
+}

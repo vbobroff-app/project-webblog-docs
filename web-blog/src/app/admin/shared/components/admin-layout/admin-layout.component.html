@@ -1,0 +1,24 @@
+<app-alert></app-alert>
+
+<nav [ngClass]="{'navbar admin':true, 'hidden': isHidden, 'open': !isHidden}">
+    <div class="flex-row">
+        <img class="logo-layout" src="./assets/logo/logo_vbobroff_white.svg">
+        <h1 class="h1-left">
+            <a routerLink="/">Проектива</a>
+        </h1>
+    </div>
+    <ul *ngIf="authService.isSignIn">
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', 'dashboard']">Главная</a>
+        </li>
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', 'create']">Создать</a>
+        </li>
+        <li>
+            <a href="#" (click)="logOut($event)">Выйти</a>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

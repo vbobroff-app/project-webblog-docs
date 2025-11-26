@@ -1,0 +1,22 @@
+.delete-container{
+    height: 170px;
+    padding: 0 20px 12px 20px;
+}
+
+.space-container{
+    min-height: 100px;
+    height: 100%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+.text-message{
+    font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
+}
+.button-footer{
+    padding: 5px 0 0 0
+}
+
+p{
+    margin-top: 128px
+}

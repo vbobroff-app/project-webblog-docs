@@ -1,0 +1,45 @@
+.refresh-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 17px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.header {
+  margin: 0 10px;
+  color: var(--dark-color-lighter);
+  font-size: large;
+}
+
+.spinner{
+  color: var(--primary-color);
+}
+
+
+::ng-deep .mat-progress-spinner circle , .mat-spinner circle
+{
+  stroke: var(--light-border-color);
+}
+
+::ng-deep .mat-progress-spinner svg {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+.cancel-btn {
+  &:hover {
+    color: red;
+    border: 1px red solid;
+  }
+}
+
+.figure {
+  color: var(--light-border-color);
+    font-size: 41px;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 47%;
+    margin-top: 172px;
+}

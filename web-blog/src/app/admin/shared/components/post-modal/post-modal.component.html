@@ -1,0 +1,5 @@
+<app-modal title="Создать и сохранить новый пост" type="warning" (close)="close.emit()">
+    <div class="posts">
+        <app-post [post]="post" command="Сохранить" (action)="submit.emit(post)"></app-post>
+    </div>
+</app-modal>

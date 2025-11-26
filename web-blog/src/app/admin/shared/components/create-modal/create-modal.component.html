@@ -1,0 +1,5 @@
+<app-modal title="Создать и сохранить новые темы" type="warning" (close)="close.emit()">
+        <div class="content">
+            <app-hub-create [themes]="themes" (action)="submit.emit(themes)"></app-hub-create>
+        </div>
+</app-modal>

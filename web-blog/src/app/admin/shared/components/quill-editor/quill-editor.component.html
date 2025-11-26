@@ -1,0 +1,4 @@
+<div (clickOutside)="onClickedOutside()">
+    <quill-editor [(ngModel)]="text" (ngModelChange)="onChange($event)" (onFocus)="onFocus($event)"
+        (onEditorCreated)="onEditorCreated($event)" [modules]="modules"></quill-editor>
+</div>

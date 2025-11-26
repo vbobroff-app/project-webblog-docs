@@ -1,0 +1,36 @@
+.container{
+    height: max-content;
+    min-width: 300px;
+    border: #ccc 1px dotted;
+    max-width: 450px;
+    padding: 1rem;
+    margin: 0.7rem 0;
+}
+.post-recent{
+    height: 1.2rem;
+}
+li {
+    display: list-item;
+    list-style-type: disc;
+ }
+ small {
+     display: inline;
+     padding-left: 5px;
+ }
+ .recent-container, .popular-container {
+     margin-left: 1.2rem;
+ }
+ .post-popular{
+    height: 1.2rem;
+ }
+ .icon {
+    margin-top: 3px;
+    opacity: 0.6;
+    cursor: pointer;
+    &:active{
+        opacity: 1;
+    }
+}
+.material-icons {
+    font-size: small;
+}

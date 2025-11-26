@@ -1,0 +1,163 @@
+<div [ngClass]="{'toggle-wrapper': true, 'tool-in': !isHiddenHeader, 'tool-out': isHiddenHeader}">
+  <button mat-mini-fab type="button" id="icon" class="action-btn start-action" (click)="onToggle()">
+    <i *ngIf="!toggled" class="material-icons icon-svg drop-icon">add</i>
+    <i *ngIf="toggled" class="material-icons icon-svg drop-icon">remove</i>
+  </button>
+</div>
+<div #container class="content-body" *ngIf="form; else loading">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div [ngClass]="{'container': true, 'opened': toggled, 'closed': !toggled}">
+
+      <div [ngClass]="{'under-layer': !toggled}">
+        <label for="icon">Иконка:</label>
+        <app-dropzone-icon (loaded)="onLoadImage($event)" (reset)="onResetImage()" [iconURL]="imageUrl">
+        </app-dropzone-icon>
+      </div>
+
+      <div class="inputs-content">
+        <div class="form-control" [ngClass]="{invalid: form.get('author').touched && form.get('author').invalid}">
+          <label for="author">Автор:</label>
+          <input id="author" type="text" formControlName="author">
+          <div *ngIf="form.get('author').touched && form.get('author').invalid" class="validation">
+            <small *ngIf="form.get('author').errors.required">
+              Поле должно быть заполнено
+            </small>
+          </div>
+
+        </div>
+
+        <div class="form-control">
+          <mat-form-field class="date-picker-wrapper">
+            <mat-label>Дата создания</mat-label>
+            <input matInput type="datetime-local" formControlName="created" placeholder="start date" step="1">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class=themes-content>
+        <form [formGroup]="hubForm" (ngSubmit)="hubSubmit()">
+          <div class="hub-container space">
+
+            <mat-form-field class="hub-field">
+              <mat-label>Рубрика</mat-label>
+              <input class="hub-input" matInput [formControl]="hubControl" containsInList [distinct]="themes"
+                [matAutocomplete]="auto">
+              <mat-hint *ngIf="themes.length==0; else themeHint">Не выбрана тема</mat-hint>
+              <mat-error *ngIf="hubControl.hasError('notUnique') && !hubControl.hasError('required')">
+                Эта тема уже выбрана
+              </mat-error>
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayHub">
+                <mat-option *ngFor="let hub of filteredHubs$ | async" [value]="hub">
+                  {{hub.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <button type="button" class="action-btn add-hub-btn close-btn" (click)="clearClick()">
+              <i class="material-icons icon-svg  middle">close</i>
+            </button>
+
+            <button type="submit" class="action-btn add-hub-btn add-btn"
+              [disabled]="hubForm.invalid || !hubControl.value">
+              <i class="material-icons icon-svg  middle">add</i>
+            </button>
+
+          </div>
+        </form>
+
+        <div class="hub-container">
+          <app-hub *ngFor="let theme of themes" [name]="theme" editable="true" [@fadeInOut] [@EnterLeave]>
+          </app-hub>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="edit-content">
+      <div class="form-control" [ngClass]="{invalid: form.get('title').touched && form.get('title').invalid}">
+        <label for="title">Название:</label>
+        <input id="title" type="text" formControlName="title">
+        <div *ngIf="form.get('title').touched && form.get('title').invalid" class="validation">
+          <small *ngIf="form.get('title').errors.required">
+            Поле должно быть заполнено
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label>Описание</label>
+        <quill-editor formControlName="description" (onEditorCreated)="onEditorCreated($event)">
+        </quill-editor>
+        <div *ngIf="form.get('description').touched && form.get('description').invalid" class="validation">
+          <small *ngIf="form.get('description').errors.required">
+            Поле должно быть заполнено
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control editor-container">
+        <label>Контент поста</label>
+        <app-quill-editor formControlName="text">
+        </app-quill-editor>
+        <!-- <quill-editor formControlName="text"  (onEditorCreated)="onEditorCreated($event)">
+        </quill-editor> -->
+        <div *ngIf="form.get('text').touched && form.get('text').invalid" class="validation">
+          <small *ngIf="form.get('title').errors.required">
+            Поле должно быть заполнено
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="fab-container">
+        <button class="btn btn-primary fab-button" matTooltip="назад на главную" matTooltipPosition="right"
+          matTooltipClass="btn-tooltip" mat-mini-fab type="button" (click)="backOnClick()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div class="fab-container save">
+        <div class="tool-box">
+          <button mat-mini-fab type="button" matTooltip="откатить изменения" matTooltipPosition="right"
+            matTooltipClass="btn-tooltip square" class="action-btn start-action cancel" (click)="refreshClick()">
+            <i class="material-icons icon-svg drop-icon material-symbols-outlined">history</i>
+          </button>
+          <button class="btn btn-primary fab-button fab-save" matTooltip="сохранить изменения"
+            matTooltipPosition="right" matTooltipClass="btn-tooltip square" mat-mini-fab type="submit"
+            [disabled]="submitted">
+            <mat-icon>save_as</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div [ngClass]="{'fab-container': true, 'fab-edit': true }">
+  <div class="tool-box">
+    <button mat-mini-fab type="button" class="action-btn start-action" (click)="onScrollUp()"
+      [disabled]="scrollPosition=='top'">
+      <i class="material-icons icon-svg drop-icon">keyboard_double_arrow_up</i>
+    </button>
+    <button mat-mini-fab type="button" class="action-btn start-action" (click)="onScrollDown()"
+      [disabled]="scrollPosition=='bottom'">
+      <mat-icon>keyboard_double_arrow_down</mat-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Загрузка...</p>
+</ng-template>
+
+<ng-template #themeHint>
+  <mat-hint>Добавить тему</mat-hint>
+</ng-template>
+
+<ng-template appModalRef></ng-template>
+
+<ngx-spinner name="postUpdateSpinner" bdColor="rgba(0, 0, 0, 0.1)" size="medium" color='#333333'
+  type="ball-spin-clockwise" [fullScreen]="true">
+  <p class="spinner-message"> Обновление... </p>
+</ngx-spinner>

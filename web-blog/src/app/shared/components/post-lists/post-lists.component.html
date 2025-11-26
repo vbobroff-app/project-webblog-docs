@@ -1,0 +1,37 @@
+<div class="container">
+    <p>Недавно прочитанные:</p>
+    <div class="recent-container">
+        <div *ngIf="recent$ | async as posts" style="width: 1920px">
+            <ul>
+                <li class="post-recent" *ngFor="let post of posts">
+                    <div>
+                        <a href="/">{{ post.title | truncate:[geTitleLength(), '...'] }}</a>
+                        <small >-{{ getShortName(post.author) | truncate:[getAuthLength(), '...']}}</small>
+                        <small>({{ post.watched | date: 'dd.MM.yyyy': null: 'ru' }})</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <p [ngStyle]="{'padding-top': '1.5rem'}">Популярные:</p>
+    <div class="popular-container">
+        <div *ngIf="popular$ | async as posts">
+            <ul>
+                <li class="post-popular" *ngFor="let post of posts" >
+                    <div style="width: 1920px">
+                        <a href="/">{{ post.title | truncate:[geTitleLength(), '...'] }}</a>
+                        <small>-{{ post.author | truncate:[24, '...']}}</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div [ngStyle]="{'padding-top': '1.5rem'}">
+        <mat-icon class="icon">star</mat-icon>
+        <span>Показать избранные</span>
+    </div>
+    <div>
+        <mat-icon class="icon">chat_bubble_outline</mat-icon>
+        <span>Выбрать с коммернариями</span>
+    </div>
+</div>

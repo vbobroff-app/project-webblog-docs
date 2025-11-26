@@ -1,0 +1,102 @@
+::ng-deep .mat-paginator {
+  background-color: transparent !important;
+  color: white !important;
+
+  ::ng-deep .mat-paginator-container {
+    min-height: 40px;
+
+    ::ng-deep .mat-paginator-page-size {
+      height: 100%;
+      margin-top: -16px; // difference between original height (56px) and reduced height (35px)
+    }
+
+    ::ng-deep .mat-paginator-range-actions {
+      height: 100%;
+    }
+  }
+}
+
+::ng-deep .mat-icon-button:disabled {
+  color: rgb(222, 222, 222) !important;
+}
+
+::ng-deep .mat-paginator-page-size {
+
+  ::ng-deep .mat-select-value {
+    // this is to change color of page size text in mat paginator
+    color: inherit !important;
+  }
+
+  ::ng-deep .mat-select-trigger {
+    // this is to change color of page size text in mat paginator
+    color: inherit !important;
+  }
+
+
+  ::ng-deep .mat-select-arrow {
+    // this is to change color of arrow beside pagesize in mat paginator
+    color: inherit !important;
+  }
+
+  ::ng-deep .mat-focus-indicator {
+    // this is to change color of arrow beside pagesize in mat paginator
+    color: inherit !important;
+  }
+
+  ::ng-deep .mat-form-field .mat-focused .mat-primary .mat-select-arrow .mat-disabled {
+    color: inherit !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: white !important;
+  }
+
+  ::ng-deep .mat-paginator-icon {
+    color: white !important;
+  }
+
+  ::ng-deep .mat-form-field-ripple {
+    background-color: white !important;
+  }
+}
+
+
+.paginator-drop-container {
+  display: grid;
+  grid-template-rows: auto;
+  pointer-events: none;
+}
+
+.paginator-front {
+  background: #33333359;
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  pointer-events: all;
+}
+
+.right {
+  justify-content: flex-end;
+  padding-right: 100px;
+}
+
+.paginator-back {
+  height: 43px;
+  width: 100%;
+
+  background: white;
+  z-index: 105;
+}
+
+.paginator-open {
+  transition: transform 0.65s ease-in-out;
+  transform: translate(0, 0);
+}
+
+.paginator-hidden {
+  transition: transform 0.65s ease-in-out;
+  transform: translate(0, 42px);
+}

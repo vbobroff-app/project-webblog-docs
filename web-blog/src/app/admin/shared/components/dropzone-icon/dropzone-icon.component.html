@@ -1,0 +1,20 @@
+<div id="drop-zone-container">
+  <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+    <dropzone class="icon-image" [config]="config" [message]="'Click or drag images'" fxLayout="row"
+      fxLayoutAlign="start strech" fxFlex="auto" (success)=onLoad($event)></dropzone>
+  </div>
+  <div *ngIf="isLoaded" id="wrapper" [ngClass]="{'action':true, 'blur-wrapper': blur}">
+    <button id="icon" (mouseover)="blur=true" (mouseout)="blur=false" class="close-btn start-action"
+      (click)="closeClick()">
+      <i class="material-icons icon-svg close-icon">close</i>
+    </button>
+    <!-- <div [ngClass]="{'close-message': true, 'visible': blur, 'fantom': !blur}">reset image</div> -->
+  </div>
+  <div class="action add-container">
+    <button id="add" (mouseover)="blur=true" (mouseout)="blur=false" class="add-btn start-action" type="button"
+      (click)="upload.click()">
+      <i class="material-icons icon-svg add-icon">attach_file</i>
+    </button>
+    <input #upload type="file" accept="image/png, image/gif, image/jpeg" class="file-input" (change)="onUpLoad($event)" >
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<app-alert delay="5000"></app-alert>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="main-container">
+
+        <div class="left-side">
+
+            <div class="form-control" [ngClass]="{invalid: form.get('author').touched && form.get('author').invalid}">
+                <label for="author">Автор:</label>
+                <input id="author" type="text" formControlName="author">
+                <div *ngIf="form.get('author').touched && form.get('author').invalid" class="validation">
+                    <small *ngIf="form.get('author').errors.required">
+                        Поле должно быть заполнено
+                    </small>
+                </div>
+            </div>
+            <div>
+                <label for="icon">Иконка:</label>
+                <app-dropzone-icon (loaded)="onLoadImage($event)" (reset)="onResetImage()" [iconURL]="iconURL">
+                </app-dropzone-icon>
+            </div>
+            <form [formGroup]="hubForm" (ngSubmit)="hubSubmit()">
+                <div class="hub-container space">
+
+                    <mat-form-field class="hub-field">
+                        <mat-label>Рубрика</mat-label>
+                        <input class="hub-input" matInput [formControl]="hubControl" containsInList [distinct]="themes"
+                            [matAutocomplete]="auto">
+                        <mat-hint *ngIf="themes.length==0; else themeHint">Не выбрана тема</mat-hint>
+                        <mat-error *ngIf="hubControl.hasError('notUnique') && !hubControl.hasError('required')">
+                            Эта тема уже выбрана
+                        </mat-error>
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayHub">
+                            <mat-option *ngFor="let hub of filteredHubs | async" [value]="hub">
+                                {{hub.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <button type="submit" class="btn" mat-button [@buttonState]="hubForm.invalid || !hubControl.value"
+                        [disabled]="hubForm.invalid || !hubControl.value">
+                        Добавить
+                    </button>
+
+                </div>
+            </form>
+            <div class="hub-container">
+                <app-hub *ngFor="let theme of themes" [name]="theme" editable="true" [@fadeInOut] [@EnterLeave]>
+                </app-hub>
+            </div>
+            <div class="button-wrapper">
+                <button type="submit" class="btn btn-dark button-post" [disabled]="form.invalid">
+                    Создать пост
+                </button>
+            </div>
+
+        </div>
+
+        <div class="right-side">
+
+            <div class="form-control" [ngClass]="{invalid: form.get('title').touched && form.get('title').invalid}">
+                <label for="title">Название:</label>
+                <input id="title" type="text" formControlName="title">
+                <div *ngIf="form.get('title').touched && form.get('title').invalid" class="validation">
+                    <small *ngIf="form.get('title').errors.required">
+                        Поле должно быть заполнено
+                    </small>
+                </div>
+            </div>
+            <div class="form-control" [ngClass]="{invalid: form.get('description').touched && form.get('description').invalid}">
+                <label>Описание:</label>
+                <div [ngClass]="{'invalid-border': form.get('description').touched && form.get('description').invalid}">
+                    <quill-editor formControlName="description"></quill-editor>
+                </div>
+                <div *ngIf="form.get('description').touched && form.get('description').invalid" class="validation">
+                    <small *ngIf="form.get('description').errors.required">
+                        Поле должно быть заполнено
+                    </small>
+                </div>
+            </div>
+            <div class="form-control" [ngClass]="{invalid: form.get('text').touched && form.get('text').invalid}">
+                <label>Контент поста</label>
+                <div [ngClass]="{'invalid-border': form.get('text').touched && form.get('text').invalid}">
+                    <app-quill-editor formControlName="text"></app-quill-editor>
+                </div>
+                <div *ngIf="form.get('text').touched && form.get('text').invalid" class="validation">
+                    <small *ngIf="form.get('text').errors.required">
+                        Поле должно быть заполнено
+                    </small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<ngx-spinner name="postCreateSpinner" bdColor="rgba(0, 0, 0, 0.1)" size="medium" color='#333333'
+    type="ball-spin-clockwise" [fullScreen]="true">
+    <p class="spinner-message"> Сохранение... </p>
+</ngx-spinner>
+
+<ng-template #themeHint>
+    <mat-hint>Добавить тему</mat-hint>
+</ng-template>
+
+<ng-template appModalRef></ng-template>
