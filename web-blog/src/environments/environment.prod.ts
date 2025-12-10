@@ -2,7 +2,7 @@ import { Environment, WebAppConfig } from './interface';
 
 const appWriteConfig: WebAppConfig = {
   appId: '6937b038000f7bcebebd',
-  databaseURL: 'http://appwrite.infra-net.pro/v1',
+  databaseURL: 'https://appwrite.infra-net.pro/v1',
   databaseId: '6937e2a1003e415aa8d4',
   collections: {
     posts: '6937e2e8002f4a8f10b4',
@@ -27,7 +27,7 @@ export const environment: Environment = {
     measurementId: "G-HZF17QCXZ9"
   },
 
-  webAppUrl: 'http://appwrite.infra-net.pro/v1',
+  webAppUrl: 'https://appwrite.infra-net.pro/v1',
   webAppConfig: appWriteConfig,
 
   apiPlatform: 'appwrite',
