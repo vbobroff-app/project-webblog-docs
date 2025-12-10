@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: web-blog
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build production
         working-directory: web-blog
