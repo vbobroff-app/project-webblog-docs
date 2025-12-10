@@ -1,19 +1,19 @@
 import { Environment, WebAppConfig } from './interface';
 
 const appWriteConfig: WebAppConfig = {
-  appId: '6695ceb7003c2815243c',
-  databaseURL: 'http://webapp.nntc.pro/v1',
-  databaseId: '66b1eaf2001e414f3bd2',
+  appId: '6937b038000f7bcebebd',
+  databaseURL: 'http://appwrite.infra-net.pro/v1',
+  databaseId: '6937e2a1003e415aa8d4',
   collections: {
-    posts: "66b1eb1200212aa41818",
-    hubs: '66b2398e0020f3d25799'
+    posts: '6937e2e8002f4a8f10b4',
+    hubs: '6937e4ba003b05696c97',
+    info: '69382555000b77835a7a'
   }
 }
 
-
 export const environment: Environment = {
   production: true,
-  url: 'https://vbobroff.net',
+  url: 'https://proektiva-web-blog.infra-net.pro',
   fbUrl: 'https://web-blog-726ee.firebaseio.com',
   apiKey: 'AIzaSyBhlqmG79XrD1-hALgu4gco1ok2NzbjH20',
   firebaseConfig: {
@@ -27,8 +27,8 @@ export const environment: Environment = {
     measurementId: "G-HZF17QCXZ9"
   },
 
-  webAppUrl: 'http://webapp.nntc.pro/v1',
+  webAppUrl: 'http://appwrite.infra-net.pro/v1',
   webAppConfig: appWriteConfig,
 
-  apiPlatform: 'firebase',
+  apiPlatform: 'appwrite',
 };
