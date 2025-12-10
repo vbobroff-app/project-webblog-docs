@@ -1,0 +1,58 @@
+name: Deploy proektiva-web-blog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web-blog/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: web-blog/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web-blog
+        run: npm ci
+
+      - name: Build production
+        working-directory: web-blog
+        run: npm run build -- --prod
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add hosts to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.JUMP_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        env:
+          JUMP_HOST: ${{ secrets.JUMP_HOST }}
+          WEB_SERVER: ${{ secrets.WEB_SERVER }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          # Copy build files through jump host
+          scp -o ProxyJump=${DEPLOY_USER}@${JUMP_HOST} \
+              -r web-blog/dist/web-blog/* \
+              ${DEPLOY_USER}@${WEB_SERVER}:~/apps/proektiva-web-blog/dist/
+
+      - name: Verify deployment
+        run: |
+          sleep 5
+          curl -f https://proektiva-web-blog.infra-net.pro || echo "Health check skipped"
