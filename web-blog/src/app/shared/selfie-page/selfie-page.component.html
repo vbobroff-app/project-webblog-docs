@@ -1,0 +1,17 @@
+<div [ngClass]="{'container-selfie-mobile': true,
+                 'cover': !screenSaveMode,
+                 'close': screenSaveMode}">
+
+  <div class="p-top">
+    <div [ngClass]="{'profile-container': true, 'short': heightState == 'short', 'high': heightState == 'high' && isTouch }">
+      <img class="profile-image" src="../assets/profile/vbobroff.jpeg">
+      <br /><br />
+      <h1 class="title-profile">Проект Web-blog</h1>
+      <h2 class="text-profile">.NET & Node.js</h2>
+      <h4>fullstack & fulltime developing</h4>
+
+    </div>
+  </div>
+  <div class="p-bottom"></div>
+
+</div>

@@ -1,0 +1,14 @@
+<app-modal title="Перезгрузка..." type="important" (close)="close.emit()">
+  <div class="refresh-container">
+
+    <h2 class="header">Несохраненные данные будут утеряны...</h2>
+
+    <mat-progress-spinner style="height: '150px'; width: '150px';" class="spinner" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+
+    <button type="button" class="btn cancel-btn" mat-button (click)="close.emit()">
+      Отмена
+    </button>
+  </div>
+  <span class="figure">{{ digit }}</span>
+</app-modal>

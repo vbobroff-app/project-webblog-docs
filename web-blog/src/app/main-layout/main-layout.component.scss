@@ -1,0 +1,56 @@
+.hidden {
+  transition: transform 0.4s ease-in-out;
+  transform: translate(0, -100%);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pin-icon{
+  width: 5px;
+  position: absolute;
+  left: 9px;
+  font-size: 12px !important;
+  opacity: 1;
+}
+
+.up-pinned{
+  transform: rotate(-90deg) translate(0px, 5px);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-items: center;
+  justify-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.drop-button{
+  font-size: 20px;
+  margin-top: 5px;
+  margin-right: -25px;
+  width: 40px;
+  padding-left: 10px;
+  &:hover{
+    cursor: pointer;
+  }
+  user-select: none;
+}
+
+.open {
+  transform: none;
+  transition: transform 0.4s ease-in-out;
+}
+
+.h1-left {
+  color: white;
+}

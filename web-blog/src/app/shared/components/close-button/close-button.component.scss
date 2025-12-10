@@ -1,0 +1,41 @@
+.action-btn {
+  border: none;
+  color: rgba(5, 5, 5, 1);
+  border-radius: 20px;
+  margin-top: 4px;
+  height: 24px;
+  width: 24px;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--primary-color);
+  transition: 0.1s;
+
+  &:disabled {
+    cursor: auto;
+    background: transparent;
+    color: var(--light-color);
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    &:disabled {
+      cursor: auto;
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--light-color);
+    }
+  }
+
+  &:active {
+    background-color: transparent;
+    opacity: 1;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.start-action {
+  opacity: 0.5;
+}

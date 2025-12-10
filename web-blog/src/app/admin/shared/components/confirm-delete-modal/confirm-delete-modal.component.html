@@ -1,0 +1,19 @@
+<app-modal title="Подтвердить удаление" type="warning" (close)="close.emit()">
+    <div class="delete-container">
+        <div class="space-container">
+
+            <h3>{{ text }}</h3>
+
+            <div class="button-footer">
+                <button type="button" class="btn" mat-button (click)="onClick()" [@buttonState]="loading"
+                    [disabled]="loading">
+                    Удалить
+                </button>
+            </div>
+        </div>
+        <ngx-spinner name="confirmDeleteSpinner" bdColor="rgba(0, 0, 0, 0.1)" size="medium" color='#333333'
+            type="ball-spin-clockwise" [fullScreen]="true">
+            <p class="spinner-message"> Удаление... </p>
+        </ngx-spinner>
+    </div>
+</app-modal>

@@ -1,0 +1,78 @@
+form{
+    height: 100%;
+}
+
+.space-container{
+    display:flex;
+    flex-direction: row;
+    min-height: 360px;
+    justify-content: space-between;
+}
+
+.hub-slider{
+    min-width: 23%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.hub-item{
+    padding: 5px 5px 0 0;
+}
+
+.edit-space{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px;
+    border-color: inherit;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.back-drop{
+    width: 60%;
+    height: 65%;
+    background: white;
+    opacity: 0.2;
+    visibility: hidden;
+    z-index: 1002;
+    position: fixed;
+    &.disable{
+        visibility: visible;
+    }
+    &.enable{
+        visibility: hidden;
+    }
+}
+
+.desc{
+    height: 70%;
+}
+
+.height{
+    height: 90%;
+    resize: none;
+    font-size: inherit;
+    border-color: rgb(0, 0, 0, 0.3);
+}
+
+textarea:focus { 
+    outline: none !important;
+    border-color: rgb(0, 0, 0, 0.3);
+}
+
+.mat-button-toggle-label-content {
+    line-height: 30px !important; 
+}
+
+.button-footer{
+    padding: 5px 0 0 0
+}
+
+.spinner-message{
+    color: #333333;
+    margin-top: 40px !important;
+    margin-left: 5px !important;
+}

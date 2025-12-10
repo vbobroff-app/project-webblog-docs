@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div style="width: 0; height: 0;">
+    <input matInput [matDatepicker]="picker" (dateChange)="dateChange($event)">
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
+  <div class="form-control">
+    <div class="up-container">
+      <button class="menu-button" mat-icon-button (click)="picker.open()">
+        <mat-icon class="menu-icon">tune</mat-icon>
+      </button>
+      <div class="filter-container">
+        <mat-icon [ngClass]="{'filter-icon': true, 'default-icon': !dateFilter, 'active-icon': dateFilter}"
+          (click)="dateClick()">filter_alt</mat-icon>
+
+        <div class="date-label" *ngIf="dateFilter">
+          <small [ngClass]="{'marked': true, 'marked-on': dateFilter}">{{ selectedValue }} </small>
+        </div>
+
+        <div class="date-selector" *ngIf="!dateFilter">
+          <mat-select [value]="selectedValue" (selectionChange)="onSelect($event)">
+            <mat-option *ngFor="let option of actions" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <mat-icon class="filter-icon" (click)="picker.open()">calendar_month</mat-icon>
+
+      </div>
+
+    </div>
+    <div [ngClass]="{'search-container': true, 'searching': searching}">
+      <input #searchInput [ngClass]="{'input-search':true, 'focus-in': focused }" matInput id="seach" type="text"
+        (change)="onTextChange($event)" (keyup)="onTyping($event)" (focus)="onFocus($event)" (blur)="onBlur($event)">
+      <button *ngIf="!typing" [ngClass]="{'button-search':true, 'disabled': focused || !hasValue }" mat-icon-button (click)="searchClick()">
+        <mat-icon style="font-size:20px">search</mat-icon>
+      </button>
+      <button id="close-button" *ngIf="typing" class="button-search" mat-icon-button (focus)="closeClick()" (click)="closeClick()">
+        <mat-icon style="font-size:20px">close</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <button class="btn btn-passive" mat-button (click)="searchClick()">искать</button>
+    <mat-button-toggle-group class="button-group" #group="matButtonToggleGroup" name="fontStyle" [value]="'name'"
+      aria-label="Font Style" (change)="onValChange(group.value)">
+      <mat-button-toggle value="all">Все</mat-button-toggle>
+      <mat-button-toggle value="name">Назв.</mat-button-toggle>
+      <mat-button-toggle value="author">Автор</mat-button-toggle>
+      <mat-button-toggle value="hub">Тэги</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <small class="text-holder">Найдено: постов 12</small>
+
+</div>

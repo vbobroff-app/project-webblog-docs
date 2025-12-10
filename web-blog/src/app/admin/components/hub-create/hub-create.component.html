@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="space-container">
+        <div class="hub-slider">
+            <app-hub *ngFor="let hub of hubs" class="hub-item" [selected]="selected && selected.name == hub.name"
+                template="button" [name]="hub.name" (click)="hubClick(hub)" [@fadeInOut] [@EnterLeave]>
+            </app-hub>
+        </div>
+        <div class="edit-space">
+
+            <div [ngClass]="{'back-drop':true, 'disable': !selected, 'enable': selected}"></div>
+
+            <div class="form-control"
+                [ngClass]="{invalid: (form.touched || nameControl.touched) && nameControl.invalid}">
+                <label for="name">Название:</label>
+                <input (keyup)="touch(nameControl)" type="text" [formControl]="nameControl"
+                    (change)="onNameEnter($event)" containsInList [distinct]="themes" [base]="base"
+                    [exclude]="selected">
+                <div *ngIf="(form.touched || nameControl.touched) && nameControl.invalid" class="validation">
+                    <small *ngIf="form.get('name').errors.required">
+                        Поле должно быть заполнено
+                    </small>
+                    <small *ngIf="nameControl.hasError('isInBase') && !nameControl.hasError('required')">
+                        Это имя уже используется
+                    </small>
+                    <small *ngIf="nameControl.hasError('notUnique') && !nameControl.hasError('required')">
+                        Имя должно быть уникальным
+                    </small>
+                </div>
+            </div>
+            <div class="form-control desc"
+                [ngClass]="{invalid: (form.touched || form.get('description').touched) && form.get('description').invalid}">
+                <label for="description">Описание</label>
+                <textarea id="description" class="height" type="text" formControlName="description"
+                    (change)="onDescriptionEnter($event)"></textarea>
+                <div *ngIf="(form.touched || form.get('description').touched) && form.get('description').invalid"
+                    class="validation">
+                    <small *ngIf="form.get('description').errors.required">
+                        Поле должно быть заполнено
+                    </small>
+                </div>
+            </div>
+        </div>
+        <ngx-spinner name="hubCreateSpinner" bdColor="rgba(0, 0, 0, 0.1)" size="medium" color='#333333' type="ball-spin-clockwise"
+            [fullScreen]="true">
+            <p class="spinner-message"> Сохранение... </p>
+        </ngx-spinner>
+    </div>
+    <div class="button-footer">
+        <button type="submit" class="btn" mat-button [@buttonState]="form.invalid" [disabled]="form.invalid || loading">
+            Сохранить
+        </button>
+    </div>
+</form>

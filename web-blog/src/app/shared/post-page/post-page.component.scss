@@ -1,0 +1,52 @@
+.post{
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .h1{
+        margin-bottom: 5rem;
+    }
+    .info{
+        strong{
+            margin-right: 1rem;
+        }
+    }
+}
+h1{
+    font-size: 3rem;
+    line-height: 1.1;
+}
+.post-container {
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.left-side{
+   padding-right: 1rem;
+   width: 450px;
+}
+.image-container{
+    width: 80%;
+    padding: 12px 15px;
+}
+.post-aria{
+    width: 1200px;
+}
+.right-side{
+    padding-left: 1rem;
+    width: 450px;
+}
+
+::ng-deep body {
+  user-select:auto;
+}
+
+quill-view-html::ng-deep .ql-snow .ql-editor pre.ql-syntax {
+    background-color: #f6f6f6;
+    color: #242729;
+    overflow: visible;
+    font-size: 1rem;
+  }

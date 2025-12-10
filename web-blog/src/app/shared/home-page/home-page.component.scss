@@ -1,0 +1,285 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+
+  height: 100%;
+  padding: 0 2rem;
+}
+
+.touch-device {
+  padding: 0;
+  overflow: hidden;
+}
+
+
+.content-container {
+  display: grid;
+  grid-template-columns: [self] 0.7fr [stack] 1fr [tunes] 400px;
+  column-gap: 10px;
+
+  width: 100%;
+  max-width: 1560px;
+  height: calc(100vh);
+  max-height: 940px;
+
+  margin-top: 50px;
+}
+
+.touch {
+  max-height: 100vh;
+  margin-top: 0px !important;
+  max-width: none !important;
+}
+
+.middle {
+  grid-template-columns: [self] 0.7fr [stack] 1fr [tunes] 400px;
+  margin-top: 40px;
+}
+
+.narrow {
+  grid-template-columns: [self] 0.7fr [stack] 1fr;
+  margin-top: 0px;
+}
+
+.tablet {
+  grid-template-columns: [stack] 1fr;
+  margin-top: 0px;
+  column-gap: 0;
+}
+
+.mobile {
+  grid-template-columns: [stack] 1fr;
+  margin-top: 0px;
+  column-gap: 0;
+}
+
+
+.code-container {
+  grid-area: self;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-width: 400px;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+.desk {
+  height: 920px;
+}
+
+.hidden {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  position: fixed;
+}
+
+.code {
+  transform: rotate(-90deg);
+  font-size: 380px;
+  line-height: 0px;
+  height: 50px;
+  font-weight: bold;
+  color: #efeff5;
+}
+
+
+.left-container {
+  pointer-events: none;
+  grid-area: self;
+
+  min-width: 300px;
+  z-index: 100;
+
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  line-height: 100vh;
+  scrollbar-width: none;
+}
+
+.left-height {
+  height: 920px !important;
+}
+
+
+.left-mobile {
+  grid-area: stack;
+  z-index: 102;
+}
+
+
+
+.center-container {
+ // min-width: 300px;
+  grid-area: stack;
+
+
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.posts {
+  min-height: 600px;
+}
+
+.right-container {
+  width: 100%;
+
+  background: white;
+  border: #ccc 1px dotted;
+  grid-area: tunes;
+
+  height: 100vh;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+
+@keyframes open-panel {
+  from {
+    transform: translate(100%, 0);
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes close-panel {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(100%, 0);
+  }
+}
+
+
+.right-container-panel {
+  top: 0px;
+  grid-area: stack;
+
+  display: flex;
+  justify-content: flex-end;
+
+
+  height: 100vh;
+  overflow: scroll;
+
+  pointer-events: none;
+  scrollbar-width: none;
+}
+
+.panel-open{
+  animation-name: open-panel;
+  animation-duration: 0.65s;
+  animation-timing-function: ease;
+}
+
+.panel-close{
+  transform: translate(100%, 0);
+
+  animation-name: close-panel;
+  animation-duration: 0.85s;
+  animation-timing-function: ease-in;
+}
+
+
+.scroll-wrapper{
+  display: flex;
+  flex-direction: row;
+  overflow-x:  scroll;
+  max-width: 450px;
+  min-width: 250px;
+  height: 100%;
+
+  pointer-events: none;
+  scrollbar-width: none;
+}
+
+.block-x{
+  overflow-x: hidden;
+}
+
+.block-y{
+  overflow-y: hidden;
+}
+
+.false-back {
+  min-width: 100%;
+  background: transparent;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+.panel-container {
+  min-width: calc(max(88%, 320px));
+
+  background: white;
+  box-shadow: -20px -5px 40px rgb(161, 161, 161);
+  height: max-content;
+
+  pointer-events: all;
+}
+
+
+.tune-panel {
+  background: #d6d6d640;
+  height: max-content;
+  //min-width: 320px;
+  border: #ccc 1px dotted;
+  max-width: 450px;
+  //padding: 1rem;
+  padding: 0rem 1rem 1rem;
+}
+
+
+
+.paginator-container {
+  position: fixed;
+  width: 100%;
+  bottom: -43px;
+  left: 0;
+  z-index: 101;
+
+  pointer-events: none;
+}
+
+.p-high {
+  bottom: auto;
+  top: 930px;
+}
+
+
+.p-middle {
+  margin-top: -10px
+}
+
+.p-narrow {
+  margin-top: -50px
+}
+
+.p-mobile {
+  margin-top: -50px
+}
+
+
+.fake-posts {
+  display: grid;
+  row-gap: 10px;
+
+  min-width: calc(min(1560px - 900px - 20px, 100vw - 900px - 20px - 4rem));
+  height: 100%;
+  min-height: 920px;
+}
+

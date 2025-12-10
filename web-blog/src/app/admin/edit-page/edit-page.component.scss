@@ -1,0 +1,266 @@
+$content-width: 1200px;
+$right-width: 320px;
+
+
+.toggle-wrapper {
+  position: fixed;
+  top: 62px;
+  left: calc(min(#{$content-width} - 10px, 100vw - 50px));
+}
+
+.content-body {
+  margin-top: 50px;
+  padding: 0 25px;
+  width: calc(min(100vw, #{$content-width}));
+}
+
+// .first{
+//     padding: 0 3.2px;
+// }
+.tool-bar {
+  display: flex;
+  margin-top: 62px;
+  margin-left: $content-width;
+  position: fixed;
+  z-index: 1;
+}
+
+.tool-in {
+  transition: transform 0.4s ease-in-out;
+  transform: translate(0, 0);
+}
+
+.tool-out {
+  transition: transform 0.4s ease-in-out;
+  transform: translate(0, -110%);
+}
+
+.action-btn {
+  border: none;
+  color: rgba(5, 5, 5, 1);
+  border-radius: 5px;
+  border: 0.8px solid;
+  margin-top: 4px;
+
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--dark-color-lighter);
+  transition: 0.1s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+
+    color: var(--dark-color-lighter);
+  }
+
+  &:active {
+
+    opacity: 1;
+    color: var(--primary-color);
+  }
+}
+
+.start-action {
+  opacity: 0.5;
+}
+
+.cancel{
+  &:active {
+    opacity: 1;
+    color: red;
+  }
+}
+
+.add-hub-btn{
+  width: 32px;
+  height: 32px;
+  opacity: 0.9;
+
+  &:hover {
+    cursor: pointer;
+    height: 34px;
+    width: 34px;
+    border: 1.5px solid;
+    color: black;
+  }
+
+  &:active {
+
+    opacity: 1;
+    color: var(--primary-color);
+  }
+}
+
+.close-btn{
+  &:hover {
+    cursor: pointer;
+    height: 34px;
+    width: 34px;
+    border: 1.5px solid;
+    color: red;
+  }
+
+  &:active {
+
+    opacity: 1;
+    color: red;
+  }
+}
+
+.add-btn{
+  &:hover {
+    cursor: pointer;
+    height: 34px;
+    width: 34px;
+    border: 1.5px solid;
+    color: var(--primary-color);
+  }
+  &:active {
+
+    opacity: 1;
+    color: var(--primary-color);
+  }
+}
+
+
+.middle{
+  vertical-align: middle;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-items: left;
+}
+
+.opened {
+  height: 227px;
+  padding-bottom: 10px;
+  visibility: visible;
+  transition: 0.3s;
+}
+
+.closed {
+  height: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.under-layer {
+  z-index: -1;
+}
+
+.edit-content {
+  padding-bottom: 50px;
+  z-index: 1001;
+}
+
+.inputs-content {
+  padding-left: 20px;
+  width: 300px;
+}
+
+.date-picker-wrapper {
+  width: 100%;
+}
+
+.themes-content {
+  padding: 15px 25px;
+  width: $right-width;
+}
+
+.hub-container {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  &.space {
+    justify-content: space-between;
+    width: 73%;
+  }
+}
+
+.hub-field {
+  max-width: 123px;
+}
+
+.hub-input {
+  border: 0;
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+::ng-deep mat-tooltip-component .btn-tooltip{
+  font-size: 10px !important;
+  padding: 0 5px;
+  align-content: center;
+  position: relative;
+  left: -20px;
+  top:27px;
+  background: #33333359;
+  backdrop-filter: blur(4px);
+  color: white;
+  border-radius: 0px;
+  border: #fff 0.5px solid;
+}
+
+::ng-deep mat-tooltip-component .square{
+  left: -15px;
+}
+
+.fab-edit {
+  pointer-events: none;
+  left: calc(min(#{$content-width} - 10px, 100vw - 50px));
+  top: calc(100vh / 2.5);
+}
+
+
+.tool-box {
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.save {
+  left: calc(min(#{$content-width} - 10px, 100vw - 50px));
+}
+
+.fab-button {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.fab-save {
+  border-radius: 5px;
+}
+
+::ng-deep .ql-container {
+  overflow-y: scroll;
+  height: 100%;
+  max-height: calc(100vh - 130px);
+  scrollbar-width: none;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  pointer-events: all;
+}

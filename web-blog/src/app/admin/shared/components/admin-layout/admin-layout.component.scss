@@ -1,0 +1,20 @@
+.open {
+  transition: transform 0.4s ease-in-out;
+  transform: translate(0, 0);
+}
+
+.hidden {
+  transition: transform 0.4s ease-in-out;
+  transform: translate(0, -100%);
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+}
+
+.h1-left {
+  margin-left: -10px;
+}
+

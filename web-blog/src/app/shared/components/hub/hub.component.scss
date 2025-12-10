@@ -1,0 +1,35 @@
+.hub-container{
+    padding: 2px 0px 2px 2px;
+    display: inline-block;
+}
+
+.mat-icon-button{
+    background: transparent;
+    color: #333333;
+    border-radius: 10px;
+    width: 24px;
+    height: 24px;
+    line-height: 34px;
+    margin-left: -2px;
+    border: 0;
+    &:hover{
+        color: red
+    }
+}
+
+.low-width{
+    padding: 0 0 0 10px;
+}
+
+.sub-close{
+    width: 24px;
+    height: 24px;   
+}
+
+.material-icons{
+    font-size: 14px;
+}
+
+.toggle-checked {
+    opacity: 1;
+  }

@@ -1,0 +1,23 @@
+<nav [ngClass]="{'navbar main':true, 'hidden': isHidden, 'open': !isHidden}">
+  <div class="flex-container">
+    <div [ngClass]="{'pin-icon': true, 'up-pinned': !isPinned}">
+      <i style="font-size: 12px" class="material-icons icon-svg ">push_pin</i>
+    </div>
+    <div (click)="homeClick()" class="flex-row">
+      <img class="logo-layout" src="./assets/logo/logo_vbobroff_white.svg">
+      <h1>Проектива</h1>
+    </div>
+    <div style="width: 100%" (click)="onClick()"></div>
+    <div (click)="rightDropClick()"
+      *ngIf="layout!='desktop' && layout!='middle' && !(screenSaveMode && (layout=='tablet' || layout=='mobile')) ">
+      <i class="material-icons icon-svg drop-button">
+        {{ getArrow() }}
+      </i>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

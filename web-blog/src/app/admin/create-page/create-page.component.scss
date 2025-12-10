@@ -1,0 +1,67 @@
+$left-width: 320px;
+
+form {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: baseline;
+}
+
+.button-wrapper{
+    padding-top: 2rem;
+}
+
+.button-post{
+    width: 100%;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-side{
+    width: $left-width;
+}
+
+.right-side{
+    margin-left: 2rem;
+    width: 100%;
+}
+
+.icon-image{
+    display: flex;
+    height: 100%;
+}
+
+.hub-container{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-basis: 100%;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    &.space{
+        justify-content: space-between;
+    }
+}
+
+.hub-field {
+    max-width: 123px;
+}
+.hub-input{
+    border: 0;
+}
+
+quill-editor::ng-deep .ql-snow .ql-editor pre.ql-syntax {
+    background-color: #f6f6f6;
+    color: #242729;
+    overflow: visible;
+    font-size: 1rem;
+  }

@@ -1,0 +1,19 @@
+<div class="hub-container">
+    <div *ngIf="template=='tab';else buttonTemplate" class="hab-wrapper">
+        <p [ngClass]="{'low-width': editable}">{{ name }}</p>
+        <button type="button" class="mat-icon-button" *ngIf="editable"  (click)="click()">
+            <mat-icon class="sub-close">close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<ng-template #buttonTemplate>
+    
+    <button type="button" *ngIf="template=='button'" [ngClass]="{'hab-toggle': true, 'toggle-checked': selected}">
+        <p [ngClass]="{'low-width': editable}">{{ name }}</p>
+        <button type="button" class="mat-icon-button" *ngIf="editable"  (click)="click()">
+            <mat-icon class="sub-close">close</mat-icon>
+        </button>
+    </button>
+
+</ng-template>

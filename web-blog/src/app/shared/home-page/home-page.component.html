@@ -1,0 +1,109 @@
+<div #mainContainer [ngClass]="{'main-container': true, 'touch-device': hasTouchScreen || isMobileDevice()}">
+  <div
+    [ngClass]="{'content-container':true, 'touch': hasTouchScreen, 'middle': layout=='middle', 'narrow': layout== 'narrow', 'tablet': layout=='tablet', 'mobile': layout=='mobile'}">
+
+    <div [ngClass]="{'code-container': true, 'desk': !hasTouchScreen && isHighDevice, 'hidden': isMobileDevice() }"
+      (click)="onClick(true)" (wheel)="onProfileWheel($event)">
+      <p class="code">code</p>
+    </div>
+
+    <div #profileContainer [ngClass]="{'left-container': true,
+                                       'left-height': !hasTouchScreen && isHighDevice,
+                                       'left-mobile': isMobileDevice()}" (scroll)="onProfileScroll($event)"
+      (wheel)="onProfileWheel($event)" (touchstart)="profileTouchStart($event)" (touchend)="profileTouchEnd($event)">
+      <app-selfie-page></app-selfie-page>
+    </div>
+
+    <div #centerContainer class="center-container" (scroll)="onPostsScroll($event)" (click)="onClick(true)"
+      (touchstart)="postTouchStart($event)">
+
+      <div #postContainer class="posts">
+        <div *ngIf="selected && selected.length; else loading">
+          <app-post *ngFor="let post of selected" [post]="post" command="Перейти" (action)="postClick(post.id)">
+          </app-post>
+        </div>
+      </div>
+
+    </div>
+
+    <div #rightContainer (click)="onClick()" [ngClass]="{'right-container': layout=='desktop' || layout=='middle',
+                  'right-container-panel':layout!='desktop' && layout!='middle',
+                  'block-y': yBlocked,
+                  'panel-open': movedRightBar,
+                  'panel-close': (layout!='desktop' && layout!='middle') && !movedRightBar }">
+
+      <div #rightScroll [ngClass]="{'scroll-wrapper': true, 'block-x': xBlocked, 'block-y': yBlocked}"
+        (scroll)="onPanelScroll($event)" (touchstart)="panelTouchStart($event)" (touchend)="panelTouchEnd($event)">
+
+        <div [ngClass]="{'false-back': true, 'hidden': layout=='desktop' || layout=='middle'}">
+        </div>
+
+        <div class="panel-container">
+          <div class="tune-panel">
+            <app-search-post></app-search-post>
+            <app-hub-card></app-hub-card>
+          </div>
+          <app-post-lists></app-post-lists>
+          <app-post-lists></app-post-lists>
+          <app-post-lists></app-post-lists>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<div [ngClass]="{'paginator-container':true,
+  'p-high': !hasTouchScreen && isHighDevice,
+  'p-desktop': layout == 'desktop',
+  'p-middle': layout == 'middle',
+  'p-narrow': layout == 'narrow',
+  'p-mobile': layout == 'mobile' || layout == 'tablet'}">
+
+  <app-paginator-adaptive [length]="pagesLength" [pageSize]="5" [pageSizeOptions]="pageSizeOptions" [show]="showFooter"
+    [showFirstLastButtons]="true" (page)="emitPagination($event)" [isRightAlign]="isNarrow"></app-paginator-adaptive>
+
+</div>
+
+<ng-template #loading>
+  <div class="fake-posts">
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="fakePost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+    <app-post [post]="newPost" command="Перейти" (action)="postClick(0)">
+    </app-post>
+  </div>
+</ng-template>

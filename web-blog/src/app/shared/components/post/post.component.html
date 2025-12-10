@@ -1,0 +1,28 @@
+<div class="card" (window:resize)="onResize($event)">
+    <div class="card-header" >
+        <h2  class="link-hover" (click)="action.emit()">{{ post.title }} </h2>
+        <small class="link-hover" >{{ post.author }}</small>
+
+    </div>
+    <div class="present-content">
+        <div>
+            <img class="icon-image" [src]="image">
+        </div>
+       <div #element class="text-content" style="width: 1920px">  <!-- full text overflow -->
+            {{ text }}
+        </div>
+    </div>
+
+    <div class="foot-container">
+
+      <div class="card-footer">
+        <small>{{ post.created | date: 'dd.MM.yy' }}</small>
+      </div>
+        <div class="hub-container">
+            <app-hub *ngFor="let hub of post.hubs" class="hub-item" [name]="hub" template="button" [selected]="true"
+                (click)="onHubClick(hub)">
+            </app-hub>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.alert-wrap{
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    max-width: 300px;
+    border-radius: 5px;
+    z-index: 1200;
+}
+
+.message{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+.bold{
+    font-weight: bold;
+    padding-right: 5px;
+}

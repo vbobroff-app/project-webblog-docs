@@ -1,0 +1,12 @@
+<div class="paginator-drop-container" >
+  <div
+    [ngClass]="{'paginator-front': true, 'right': isRightAlign, 'paginator-open': show, 'paginator-hidden': !show}">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      [showFirstLastButtons]="showFirstLastButtons" (page)="emitPagination($event)">
+    </mat-paginator>
+
+  </div>
+
+  <div class="paginator-back">
+  </div>
+</div>
