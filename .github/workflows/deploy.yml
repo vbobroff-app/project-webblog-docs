@@ -40,6 +40,8 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.JUMP_HOST }} >> ~/.ssh/known_hosts
+          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_USER }}@${{ secrets.JUMP_HOST }} \
+            "ssh-keyscan -H ${{ secrets.WEB_SERVER }}" >> ~/.ssh/known_hosts
 
       - name: Deploy to server
         env:
